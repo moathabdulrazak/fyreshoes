@@ -5,7 +5,7 @@ import ShoeCard from "../../components/ShoeCard.jsx/ShoeCard.jsx";
 import { useLocation } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 
-function Gigs() {
+function Shoes() {
   const [sort, setSort] = useState("sales");
   const [open, setOpen] = useState(false);
   const minRef = useRef();
@@ -47,4 +47,4 @@ function Gigs() {
   );
 }
 
-export default Gigs;
+export default Shoes;

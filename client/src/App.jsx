@@ -8,6 +8,7 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import "./global.css";
 import ShoesPage from "./pages/shoesPage/ShoesPage.jsx";
 import Add from "./add/Add.jsx";
+import Shoe from "./pages/shoePage/shoePage.jsx";
 function App() {
   const queryClient = new QueryClient();
   const Layout = () => {
@@ -52,7 +53,8 @@ function App() {
           element: <Add/>
         },
         {
-          path: "/gig/:id",
+          path: "/shoe/:id",
+          element: <Shoe/>
         },
       ],
     },

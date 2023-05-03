@@ -1,23 +1,53 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './LoginPage.css';
-
+import { useNavigate } from "react-router-dom";
+import newRequest from "../../utils/newRequest.js";
 export const LoginPage = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(false);
+
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await newRequest.post("/auth/login", { username, password });
+      localStorage.setItem("currentUser", JSON.stringify(res.data));
+      setSuccess(true);
+      setTimeout(() => {
+        navigate("/");
+      }, 500); 
+    } catch (err) {
+      setError(err.response.data);
+    }
+  };
   return (
-    <div className="login-page-container">
-      <div className="login-form-container">
-        <h1 className="login-heading">Welcome Back!</h1>
-        <form className="login-form">
-          <label htmlFor="email" className="login-label">Email:</label>
-          <input type="email" id="email" className="login-input" required />
+    <div className="login">
+    <form onSubmit={handleSubmit}>
+      <h1>Sign in</h1>
+      <label htmlFor="">Username</label>
+      <input
+        name="username"
+        type="text"
+        placeholder="johndoe"
+        onChange={(e) => setUsername(e.target.value)}
+      />
 
-          <label htmlFor="password" className="login-label">Password:</label>
-          <input type="password" id="password" className="login-input" required />
-
-          <button type="submit" className="login-button">Log In</button>
-        </form>
-        <p className="signup-link">Don't have an account? <a href="/signup">Sign up here</a></p>
-      </div>
-    </div>
+      <label htmlFor="">Password</label>
+      <input
+        name="password"
+        type="password"
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <button type="submit">Login</button>
+      {error && error}
+      {success && (
+        <p style={{ color: "green" }}>You have successfully logged in!</p>
+      )}
+    </form>
+  </div>
   );
 };
 

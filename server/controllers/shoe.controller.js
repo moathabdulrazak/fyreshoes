@@ -1,8 +1,8 @@
-import shoe from '../models/shoe.model.js'
+import Shoe from '../models/shoe.model.js'
 import createError from "../utils/createError.js"
 
 export const createShoe = async (req, res, next) => {
-  const newShoe = new shoe({
+  const newShoe = new Shoe({
     userId: req.userId,
     ...req.body
   })
@@ -17,8 +17,16 @@ export const createShoe = async (req, res, next) => {
 
 export const deleteShoe = async (req, res, next) => {
 
+
   try {
-      
+    const shoe  = await Shoe.findById(req.params.id)
+
+    // @ts-ignore
+    if(shoe.userId !== req.userId ) return next(createError(403, "You can only delete your shoe."))
+
+    await Shoe.findByIdAndDelete(req.params.id)
+    // @ts-ignore
+    res.status(200).send(`Shoe at this  ${shoe.title} has been deleted`)
   } catch (error) {
     next(error)
   }

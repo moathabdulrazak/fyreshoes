@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
 
-const GigSchema = new Schema(
+const shoeSchema = new Schema(
   {
     userId: {
       type: String,
@@ -53,4 +53,4 @@ const GigSchema = new Schema(
   }
 );
 
-export default mongoose.model("Gig", GigSchema);
+export default mongoose.model("Shoe", shoeSchema);

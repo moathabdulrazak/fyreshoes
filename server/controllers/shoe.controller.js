@@ -34,7 +34,10 @@ export const deleteShoe = async (req, res, next) => {
 
 export const getShoe = async (req, res, next) => {
   try {
-      
+    const shoe = await Shoe.findById(req.params.id)
+    // @ts-ignore
+    if(!shoe) return next(createError(404, `No shoe has been found at this id `))
+    res.status(200).send(shoe)
   } catch (error) {
     next(error)
   }

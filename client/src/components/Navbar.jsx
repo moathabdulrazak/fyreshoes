@@ -8,13 +8,13 @@ export const Navbar = () => {
         <a href="/">Fyre</a>
       </div>
       <ul className="nav-links">
-        <li><a href="/">Home</a></li>
-        <li><a href="/products">Products</a></li>
-        <li><a href="/contact">Contact</a></li>
-        <li><a href="/about">About</a></li>
+        <li><a href="/" className="nav-link">Home</a></li>
+        <li><a href="/shoes" className="nav-link">shoes</a></li>
       </ul>
-      <button className="login-button">Log In</button>
-      <button className="login-button">register </button>
+      <div className="auth-buttons">
+      <a href="/login">  <button className="register-button">Login</button></a>
+      <a href="/register">  <button className="register-button">Register</button></a>
+      </div>
     </nav>
   )
 }

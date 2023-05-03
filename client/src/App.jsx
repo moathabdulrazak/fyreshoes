@@ -1,7 +1,9 @@
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import React from "react";
 import Navbar from "./components/Navbar";
-import HomePage from "./pages/HomePage";
+import HomePage from "./pages/HomePage/HomePage";
+import RegisterPage from "./pages/RegisterPage/RegisterPage";
+import LoginPage from "./pages/LoginPage/LoginPage";
 function App() {
   const Layout = () => {
     return (
@@ -46,9 +48,11 @@ function App() {
     },
     {
       path: "/register",
+      element: <RegisterPage/>
     },
     {
       path: "/login",
+      element: <LoginPage/>
     },
     {
       path: "/pay/:id",

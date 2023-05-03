@@ -24,6 +24,9 @@ const Navbar = () => {
           <Link className="link" to="/">
             <span className="text">Fyre</span>
           </Link>
+          <Link className="link" to="/shoes">
+            <span className="text">shoes</span>
+          </Link>
         </div>
         <div className="links">
           {currentUser ? (

@@ -3,17 +3,23 @@ import React from "react";
 import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage/HomePage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import "./global.css";
+import ShoesPage from "./pages/shoesPage/ShoesPage.jsx";
 function App() {
+  const queryClient = new QueryClient();
   const Layout = () => {
     return (
       <div className="app">
-        <Navbar/>
+        <QueryClientProvider client={queryClient}>
+          <Navbar />
           <Outlet />
+        </QueryClientProvider>
       </div>
     );
   };
+
 
   const router = createBrowserRouter([
     {
@@ -25,7 +31,8 @@ function App() {
           element: <HomePage/>
         },
         {
-          path: "/gigs",
+          path: "/shoes",
+          element: <ShoesPage/>
         },
         {
           path: "/mygigs",

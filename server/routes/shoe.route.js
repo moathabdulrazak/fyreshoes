@@ -12,6 +12,6 @@ const router = express.Router()
 router.post("/", verifyToken, createShoe )
 router.delete("/:id", verifyToken, deleteShoe )
 router.get("/single/:id",  getShoe )
-router.get("/", verifyToken, getShoes )
+router.get("/",  getShoes )
 
 export default router;

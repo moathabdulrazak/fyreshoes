@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import "./global.css";
 import ShoesPage from "./pages/shoesPage/ShoesPage.jsx";
+import Add from "./add/Add.jsx";
 function App() {
   const queryClient = new QueryClient();
   const Layout = () => {
@@ -48,6 +49,7 @@ function App() {
         },
         {
           path: "/add",
+          element: <Add/>
         },
         {
           path: "/gig/:id",

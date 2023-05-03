@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import './Navbar.css';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import newRequest from '../utils/newRequest.js';
+import './Navbar.css';
 
 const Navbar = () => {
   const currentUser = JSON.parse(localStorage.getItem('currentUser'));
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
+
   const handleLogout = async () => {
     try {
       await newRequest.post('/auth/logout');
@@ -42,16 +43,9 @@ const Navbar = () => {
               <span className="username">{currentUser?.username}</span>
               {open && (
                 <div className="options">
-                  {currentUser && (
-                    <>
-                      <Link className="link" to="/mygigs">
-                        My Shoes
-                      </Link>
-                      <Link className="link" to="/add">
-                        Post
-                      </Link>
-                    </>
-                  )}
+                  <Link className="link" to="/mygigs">
+                    My Shoes
+                  </Link>
                   <Link className="link" to="/orders">
                     Orders
                   </Link>
@@ -73,6 +67,11 @@ const Navbar = () => {
                 <button className="join-button">Join</button>
               </Link>
             </>
+          )}
+          {currentUser && (
+            <Link className="link" to="/add">
+              <button className="upload-button">Upload</button>
+            </Link>
           )}
         </div>
       </div>

@@ -31,6 +31,10 @@ const ShoeCard = ({ item }) => {
           <p className="shoeCard-desc">{item.desc}</p>
           <div className="shoeCard-star">
             <img src="./img/star.png" alt="" />
+            <span>
+              {!isNaN(item.totalHype / item.hypeNumber) &&
+                Math.round(item.totalHype / item.hypeNumber)}
+            </span>
           </div>
         </div>
         <hr className="shoeCard-divider" />

@@ -25,7 +25,7 @@ const shoeSchema = new Schema(
     },
     category: {
       type: String,
-      required: true,
+      required: false,
     },
     price: {
       type: Number,
@@ -33,7 +33,7 @@ const shoeSchema = new Schema(
     },
     cover: {
       type: String,
-      required: true,
+      required: false,
     },
     images: {
       type: [String],

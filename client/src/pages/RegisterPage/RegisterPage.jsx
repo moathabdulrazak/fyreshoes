@@ -1,28 +1,83 @@
-import React from 'react';
-import './RegisterPage.css';
+import React, { useState } from "react";
+import upload from "../../utils/upload";
+import "./RegisterPage.css";
+import newRequest from "../../utils/newRequest";
+import { useNavigate } from "react-router-dom";
 
-const RegisterPage = () => {
+function Register() {
+  const [file, setFile] = useState(null);
+  const [user, setUser] = useState({
+    username: "",
+    email: "",
+    password: "",
+    img: "",
+  });
+
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setUser((prev) => {
+      return { ...prev, [e.target.name]: e.target.value };
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const url = await upload(file);
+    try {
+      await newRequest.post("/auth/register", {
+        ...user,
+        img: url,
+      });
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
-    <div className="register-page-container">
-      <h1 className="register-page-heading">Join the Hype!</h1>
-      <form className="register-page-form">
-        <div className="form-group">
+    <div className="register">
+      <form onSubmit={handleSubmit}>
+        <div className="left">
+          <h1>Create a new account</h1>
           <label htmlFor="username">Username</label>
-          <input type="text" id="username" name="username" placeholder="Enter your username" required />
-        </div>
-        <div className="form-group">
+          <input
+            name="username"
+            type="text"
+            placeholder="johndoe"
+            onChange={handleChange}
+            required
+          />
           <label htmlFor="email">Email</label>
-          <input type="email" id="email" name="email" placeholder="Enter your email" required />
-        </div>
-        <div className="form-group">
+          <input
+            name="email"
+            type="email"
+            placeholder="email"
+            onChange={handleChange}
+            required
+          />
           <label htmlFor="password">Password</label>
-          <input type="password" id="password" name="password" placeholder="Enter your password" required />
+          <input
+            name="password"
+            type="password"
+            placeholder="********"
+            onChange={handleChange}
+            required
+          />
+          <label htmlFor="img">Profile Picture</label>
+          <input
+            name="img"
+            type="file"
+            accept="image/*"
+            onChange={(e) => setFile(e.target.files[0])}
+            required
+          />
+          <button type="submit">Register</button>
         </div>
-        <button type="submit" className="register-page-button">Register Now</button>
       </form>
-      <p className="register-page-cta">Already have an account? <a href="/login">Log In</a></p>
     </div>
-  )
+  );
 }
 
-export default RegisterPage;
+export default Register;

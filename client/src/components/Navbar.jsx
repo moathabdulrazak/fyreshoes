@@ -1,22 +1,80 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Navbar.css';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import newRequest from '../utils/newRequest.js';
 
-export const Navbar = () => {
+const Navbar = () => {
+  const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+  const handleLogout = async () => {
+    try {
+      await newRequest.post('/auth/logout');
+      localStorage.setItem('currentUser', null);
+      navigate('/');
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
-    <nav className="navbar">
-      <div className="logo">
-        <a href="/">Fyre</a>
+    <div className="navbar">
+      <div className="container">
+        <div className="logo">
+          <Link className="link" to="/">
+            <span className="text">Fyre</span>
+          </Link>
+        </div>
+        <div className="links">
+          {currentUser ? (
+            <div className="user" onClick={() => setOpen(!open)}>
+              <img
+                className="profile-picture"
+                src={
+                  currentUser.img ||
+                  'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png'
+                }
+                alt="Profile"
+              />
+              <span className="username">{currentUser?.username}</span>
+              {open && (
+                <div className="options">
+                  {currentUser && (
+                    <>
+                      <Link className="link" to="/mygigs">
+                        My Shoes
+                      </Link>
+                      <Link className="link" to="/add">
+                        Post
+                      </Link>
+                    </>
+                  )}
+                  <Link className="link" to="/orders">
+                    Orders
+                  </Link>
+                  <Link className="link" to="/messages">
+                    Messages
+                  </Link>
+                  <Link to={'/'} className="link" onClick={handleLogout}>
+                    Logout
+                  </Link>
+                </div>
+              )}
+            </div>
+          ) : (
+            <>
+              <Link to="/login" className="link">
+                Sign In
+              </Link>
+              <Link className="link" to="/register">
+                <button className="join-button">Join</button>
+              </Link>
+            </>
+          )}
+        </div>
       </div>
-      <ul className="nav-links">
-        <li><a href="/" className="nav-link">Home</a></li>
-        <li><a href="/shoes" className="nav-link">shoes</a></li>
-      </ul>
-      <div className="auth-buttons">
-      <a href="/login">  <button className="register-button">Login</button></a>
-      <a href="/register">  <button className="register-button">Register</button></a>
-      </div>
-    </nav>
-  )
-}
+    </div>
+  );
+};
 
 export default Navbar;

@@ -1,10 +1,11 @@
 import express from "express"
 import dotenv from 'dotenv'
 import mongoose from "mongoose";
+import cors from "cors";
 
 const app = express()
 dotenv.config()
-
+mongoose.set("strictQuery", true);
 const connect = async () => {
 
   try {
@@ -14,6 +15,9 @@ const connect = async () => {
     console.log(error);
   }
 };
+
+app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+
 app.use((err, req, res, next) => {
   const errorStatus = err.status || 500;
   const errorMessage = err.message || "Something went wrong!";

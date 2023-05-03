@@ -45,7 +45,8 @@ export const getShoe = async (req, res, next) => {
 
 export const getShoes = async (req, res, next) => {
     try {
-      
+      const shoes = await Shoe.find()
+      res.status(200).send(shoes)
     } catch (error) {
       next(error)
     }

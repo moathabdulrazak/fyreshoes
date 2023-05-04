@@ -1,8 +1,8 @@
 import React, { useReducer, useState } from "react";
-import { shoeReducer, INITIAL_STATE } from "../reducers/shoeReducer.js";
-import upload from "../utils/upload.js";
+import { shoeReducer, INITIAL_STATE } from "../../reducers/shoeReducer.js";
+import upload from "../../utils/upload.js";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import newRequest from "../utils/newRequest.js";
+import newRequest from "../../utils/newRequest.js";
 import { useNavigate } from "react-router-dom";
 import './Add.css'
 const Add = () => {

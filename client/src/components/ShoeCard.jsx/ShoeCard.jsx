@@ -39,7 +39,6 @@ const ShoeCard = ({ item }) => {
         </div>
         <hr className="shoeCard-divider" />
         <div className="shoeCard-detail">
-          <img className="shoeCard-heart" src="./img/heart.png" alt="" />
           <div className="shoeCard-price">
             <span className="shoeCard-starting-at">STARTING AT</span>
             <h2 className="shoeCard-price-amount">$ {item.price}</h2>

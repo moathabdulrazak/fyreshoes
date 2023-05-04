@@ -28,7 +28,7 @@ const ShoeCard = ({ item }) => {
               <span className="shoeCard-username">{data.username}</span>
             </div>
           )}
-          <p className="shoeCard-desc">{item.desc}</p>
+          <h3 className="shoeCard-desc">{item.title}</h3>
           <div className="shoeCard-star">
             <img src="https://static.vecteezy.com/system/resources/previews/011/098/350/original/fire-flat-cartoon-png.png" alt="" />
             <span>

@@ -30,7 +30,7 @@ const ShoeCard = ({ item }) => {
           )}
           <p className="shoeCard-desc">{item.desc}</p>
           <div className="shoeCard-star">
-            <img src="./img/star.png" alt="" />
+            <img src="https://static.vecteezy.com/system/resources/previews/011/098/350/original/fire-flat-cartoon-png.png" alt="" />
             <span>
               {!isNaN(item.totalHype / item.hypeNumber) &&
                 Math.round(item.totalHype / item.hypeNumber)}
